@@ -17,7 +17,7 @@ name. Plus, no one prevents you from submitting a debian directory.
 
 For example:
 
-A-Certain-Collection/
+A-Certain-Collection/  # For example, this git repository.
     library-foo/
         library-foo.durpkg
         library-foo-ubuntu.durpkg

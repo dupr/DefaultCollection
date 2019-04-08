@@ -9,9 +9,6 @@ Repository Toolkit or any related .durpkg collections or single .durpkg files.
 Please Take your own risk utilizing the toolkit, and please review every line
 of code before execution.
 
-DISCLAINMER: Everything here is totoally unrelated to the Debian Project.
-Take your own risk using anything here, and please review all the code before execution
-
                Directory Hierarchy Specification
 
 A collection, stored in a git repository or plain directory, gathers only

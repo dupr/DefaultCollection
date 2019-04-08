@@ -26,4 +26,5 @@ A-Certain-Collection/
         app-bar.durpkg
         0000-fix-blah-blah.patch
     app-xyz/
+        app-xyz.durpkg  # This file contains an empty f822 part
         debian/*

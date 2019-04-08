@@ -1,0 +1,13 @@
+Source: rover
+Section: admin
+Homepage: https://salsa.debian.org/debian/rover
+Priority: optional
+Standards-Version: 4.3.0
+Maintainer: Mo Zhou <cdluminate@gmail.com>
+Build-Depends: debhelper-compat (= 11),
+
+Package: rover
+Architecture: all
+Depends: ${misc:Depends}, python3-termbox, python3 (>= 3.6),
+Description: text-based light-weight frontend for update-alternatives
+ text-based light-weight frontend for update-alternatives

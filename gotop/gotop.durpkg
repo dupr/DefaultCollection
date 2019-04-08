@@ -1,0 +1,67 @@
+#!/bin/bash
+set -e
+
+name="gotop"
+description="A terminal based graphical activity monitor inspired by gtop and vtop"
+srctype="http"
+src="https://github.com/cjbassi/gotop/releases/download/3.0.0/gotop_3.0.0_linux_amd64.tgz"
+
+# get upstream source and delete unwanted files
+do_source () {
+	wget -c $src
+	mkdir gotop
+	tar zxvf gotop_3.0.0_linux_amd64.tgz -C gotop/
+}
+
+# unfold the debian scripts
+do_unfold () {
+	pushd gotop
+	unfold -f ../${0%.sh}.f822
+	popd
+}
+
+# start the build process
+do_build () {
+	pushd gotop
+	debuild -j4
+	popd
+}
+
+# cleanup
+do_clean () {
+	rm -rf gotop
+}
+
+do_source
+do_unfold
+do_build
+do_clean
+^ debian/changelog
+gotop (3.0.0) experimental; urgency=medium
+
+  * DUPR Release.
+
+ -- Mo Zhou <cdluminate@gmail.com>  Fri, 05 Apr 2019 04:38:24 +0000
+^ debian/control
+Source: gotop
+Section: utils
+Priority: optional
+Standards-Version: 4.3.0
+Maintainer: Mo Zhou <cdluminate@gmail.com>
+Build-Depends: debhelper-compat (= 11),
+
+Package: gotop
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends},
+Description: A terminal based graphical activity monitor inspired by gtop and vtop
+ A terminal based graphical activity monitor inspired by gtop and vtop
+^ debian/copyright
+AGPL-3.0
+^ debian/gotop.install
+gotop  usr/bin/
+^ debian/rules
+#!/usr/bin/make -f
+%:
+	dh $@
+^ debian/source/format
+3.0 (native)

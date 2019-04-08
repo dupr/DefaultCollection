@@ -13,7 +13,7 @@ of code before execution.
 
 A collection, stored in a git repository or plain directory, gathers only
 packaging files, e.g. .durpkg, stored in subdirectories named by the source
-name.
+name. Plus, no one prevents you from submitting a debian directory.
 
 For example:
 
@@ -25,3 +25,5 @@ A-Certain-Collection/
     app-bar/
         app-bar.durpkg
         0000-fix-blah-blah.patch
+    app-xyz/
+        debian/*

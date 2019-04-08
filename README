@@ -1,5 +1,8 @@
 This is the Default Collection of Debian User Packaging Repository.
 
+DISCLAINMER: Everything here is totoally unrelated to the Debian Project.
+Take your own risk using anything here, and please review all the code before execution
+
                Directory Hierarchy Specification
 
 A collection, stored in a git repository or plain directory, gathers only

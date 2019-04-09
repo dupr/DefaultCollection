@@ -1,5 +1,7 @@
 #!/bin/bash
 set -e
+. /usr/share/duprkit/duprkit || (echo "Error: duprkit installation is incorrect."; exit 1)
+export DK_VERBOSE=1
 
 # Meta Information
 src="gotop"
@@ -10,78 +12,17 @@ license="AGPL-3.0"
 section="utils"
 stdver="4.3.0"
 compat="11"
-maintainers="Mo Zhou <lumin@debian.org>"
+maintainer="Mo Zhou <lumin@debian.org>"
 builddepends=""
 
 # get upstream source and delete unwanted files
-do_source () {
-	wget -c $srcurl
-	mkdir $src
-	tar zxvf gotop_3.0.0_linux_amd64.tgz -C $src/
-}
+wget -c $srcurl; mkdir $src
+tar zxvf gotop_3.0.0_linux_amd64.tgz -C $src/
 
 # unfold the debian scripts
-do_unfold () {
-	pushd $src
-	sed -i \
-		-e "s/@DUPR_SOURCE@/$src/g" \
-		-e "s/@DUPR_VERSION@/$version/g" \
-		-e "s/@DUPR_SECTION@/$section/g" \
-		-e "s/@DUPR_STDVER@/$stdver/g" \
-		-e "s/@DUPR_COMPAT@/$compat/g" \
-		-e "s/@DUPR_UPLOADERS@/$maintainers/g" \
-		-e "s/@DUPR_BD@/$builddepends/g" \
-		-e "s/@DUPR_COPYRIGHT@/$license/g" \
-		-e "s/@DUPR_DESC@/$description/g" \
-		-e "s/@DUPR_DATE@/$(date -R)/g" \
-		../${0%.sh}.hft
-	hft -u ../${0%.sh}.hft
-	popd
-}
-
-# trigger the build process
-do_trigger_build () {
-	pushd $src
-	debuild -j4
-	popd
-}
-
-do_source
-do_unfold
-do_trigger_build
-^############################################################## SPLIT LINE ####
-^ debian/changelog
-@DUPR_SOURCE@ (@DUPR_VERSION@) experimental; urgency=low
-
-  * Unofficial D**ian User Repo Release.
-
- -- Anonymous <anonymous@example.org>  @DUPR_DATE@
-^############################################################## SPLIT LINE ####
-^ debian/control
-Source: @DUPR_SOURCE@
-Section: @DUPR_SECTION@
-Priority: optional
-Standards-Version: @DUPR_STDVER@
-Maintainer: D**ian User Repo Contributors
-Uploaders: @DUPR_UPLOADERS@
-Build-Depends: debhelper-compat (= @DUPR_COMPAT@), @DUPR_BD@
-
-Package: @DUPR_SOURCE@
-Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends},
-Description: @DUPR_DESC@
- @DUPR_DESC@
-^############################################################## SPLIT LINE ####
-^ debian/copyright
-@DUPR_COPYRIGHT@
+hft -u ${0%.sh}.hft -d $src/ -v
+dkGenerate $src
+dkStartBuild $src
 ^############################################################## SPLIT LINE ####
 ^ debian/gotop.install
 gotop  usr/bin/
-^############################################################## SPLIT LINE ####
-^ debian/rules
-#!/usr/bin/make -f
-%:
-	dh $@
-^############################################################## SPLIT LINE ####
-^ debian/source/format
-3.0 (native)

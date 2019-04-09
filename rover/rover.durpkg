@@ -15,7 +15,7 @@ do_source () {
 # unfold the debian scripts
 do_unfold () {
 	pushd rover
-	unfold -f ../${0%.sh}.f822
+	hft -u ../${0%.sh}.hft -v
 	popd
 }
 

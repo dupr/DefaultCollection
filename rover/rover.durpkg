@@ -1,17 +1,18 @@
 #!/bin/bash
 set -e
 . /usr/share/duprkit/duprkit || (echo "Error: duprkit installation is incorrect."; exit 1)
+export DK_VERBOSE=1
 
 # Meta Information
 src="rover"
 description="text-based light-weight frontend for update-alternatives"
-srcurl="https://salsa.debian.org/debian/rover.git"
+srcurl="file:///home/lumin/Debian/rover.pkg/rover"
 version="0.72"
 license="GPL-3.0+"
 section="utils"
 stdver="4.3.0"
 compat="11"
-maintainers="Anonymous <foobar@example.org>"
+maintainer="Anonymous <foobar@example.org>"
 build_depends=""
 
 # Get and Pre-Process Source

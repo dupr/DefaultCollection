@@ -7,8 +7,8 @@ tar zxf 0.5.2.tar.gz -C .
 ln -s blis-0.5.2 blis
 
 pushd blis
-sed -i -e "s/@DUPR_DATE@/$(date -R)/g" ../${0%.sh}.f822
-unfold -f ../${0%.sh}.f822
+sed -i -e "s/@DUPR_DATE@/$(date -R)/g" ../${0%.sh}.hft
+hft -u ../${0%.sh}.hft -v
 
 # trigger the build process
 debuild -j4
@@ -16,7 +16,7 @@ popd
 rm blis
 ^############################################################## SPLIT LINE ####
 ^ debian/changelog
-blis (05.2) experimental; urgency=low
+blis (0.5.2) experimental; urgency=low
 
   * Unofficial D**ian User Repo Release.
 

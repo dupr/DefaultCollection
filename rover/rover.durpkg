@@ -1,68 +1,24 @@
 #!/bin/bash
 set -e
+. /usr/share/duprkit/duprkit || (echo "Error: duprkit installation is incorrect."; exit 1)
 
-name="rover"
+# Meta Information
+src="rover"
 description="text-based light-weight frontend for update-alternatives"
-srctype="git"
-src="https://salsa.debian.org/debian/rover.git"
+srcurl="https://salsa.debian.org/debian/rover.git"
+version="0.72"
+license="GPL-3.0+"
+section="utils"
+stdver="4.3.0"
+compat="11"
+maintainers="Anonymous <foobar@example.org>"
+build_depends=""
 
-# get upstream source and delete unwanted files
-do_source () {
-	git clone $src rover
-	rm -rf rover/.git rover/debian
-}
+# Get and Pre-Process Source
+git clone $srcurl $src; rm -rf $src/.git $src/debian
 
-# unfold the debian scripts
-do_unfold () {
-	pushd rover
-	hft -u ../${0%.sh}.hft -v
-	popd
-}
+# Unfold the HFT part (if any) into the dir. Then Generate missing files.
+dkGenerate $src
 
-# start the build process
-do_build () {
-	pushd rover
-	debuild -j4
-	popd
-}
-
-do_source
-do_unfold
-do_build
-^ debian/changelog
-rover (0.72) experimental; urgency=medium
-
-  * Allow window resize and Rover resize, gracefully.
-  * Don't actually set() when FOCUS stays on left pane.
-  * Remove trailing spaces in d/control.
-
- -- Mo Zhou <cdluminate@gmail.com>  Fri, 05 Apr 2019 04:38:24 +0000
-^ debian/control
-Source: rover
-Section: admin
-Homepage: https://salsa.debian.org/debian/rover
-Priority: optional
-Standards-Version: 4.3.0
-Maintainer: Mo Zhou <cdluminate@gmail.com>
-Build-Depends: debhelper-compat (= 11),
-
-Package: rover
-Architecture: all
-Depends: ${misc:Depends}, python3-termbox, python3 (>= 3.6),
-Description: text-based light-weight frontend for update-alternatives
- text-based light-weight frontend for update-alternatives
-^ debian/copyright
-Copyright: 2018, Mo Zhou <lumin@debian.org>
-License: GPL-3.0+
-^ debian/rover.install
-rover  usr/bin/
-^ debian/rover.links
-#/usr/bin/rover /usr/bin/talternatives
-^ debian/rover.manpages
-rover.1
-^ debian/rules
-#!/usr/bin/make -f
-%:
-	dh $@
-^ debian/source/format
-3.0 (native)
+# Trigger the build process
+dkStartBuild $src

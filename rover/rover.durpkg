@@ -26,15 +26,9 @@ do_build () {
 	popd
 }
 
-# cleanup
-do_clean () {
-	rm -rf rover
-}
-
 do_source
 do_unfold
 do_build
-do_clean
 ^ debian/changelog
 rover (0.72) experimental; urgency=medium
 

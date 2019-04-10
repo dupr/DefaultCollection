@@ -20,6 +20,10 @@ git clone $srcurl $src; rm -rf $src/.git $src/debian
 
 # Unfold the HFT part (if any) into the dir. Then Generate missing files.
 dkGenerate $src
+hft -u ${0%.sh}.hft -d $src/ -v
 
 # Trigger the build process
 dkStartBuild $src
+
+^ debian/install
+rover usr/bin/

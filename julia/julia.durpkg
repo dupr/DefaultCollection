@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+src="julia"
+description="The Julia Programming Language"
+
 # get upstream source and delete unwanted files
 if ! test -r julia-1.1.0-linux-x86_64.tar.gz; then
 	wget -c https://julialang-s3.julialang.org/bin/linux/x64/1.1/julia-1.1.0-linux-x86_64.tar.gz

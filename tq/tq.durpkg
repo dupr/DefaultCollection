@@ -1,0 +1,35 @@
+#!/bin/sh
+set -e
+. /usr/share/duprkit/duprkit || \
+	(echo "Error: the duprkit installation looks broken."; exit 1)
+export DK_VERBOSE=1
+
+src="tq"
+version="0.4.5"
+description="Command Line Batch Job Manager/Scheduler"
+license="Expat/MIT"
+section="utils"
+stdver="4.3.0"
+compat="11"
+maintainer="Anonymous <foobar@example.org>"
+srcurl="https://github.com/cdluminate/tq/archive/0.4.5.tar.gz"
+md5sum="88e86dc792ba0dc1f81ce424d950748a"
+homepage="https://github.com/cdluminate/tq"
+build_depends=""
+depends=""
+dh_buildsystem="pybuild"
+dh_with="python3"
+source_format=""
+dk_skip="dh_auto_test"
+
+dkGet; ln -s $src.blob $src.tar.gz
+mkdir $src; tar xvf $src.tar.gz --strip-components=1 -C $src/
+
+dkGenerate $src
+#hft -v -u ${0%.sh}.hft -d $src/ -F
+dkSubst $src/debian
+
+# Trigger the build
+dkStartBuild $src
+
+#EOF

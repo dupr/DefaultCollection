@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+. /usr/share/duprkit/duprkit || \
+	(echo "Error: the duprkit installation looks broken."; exit 1)
+export DK_VERBOSE=1
+
+src="bazel"
+version="0.24.1"
+description="a fast, scalable, multi-language and extensible build system"
+license="Apache-2.0"
+srcurl="https://github.com/bazelbuild/bazel/releases/download/0.24.1/bazel_0.24.1-linux-x86_64.deb"
+md5sum="bc135760162e76dcd6dd7e9863049158"
+homepage="https://bazel.build/"
+
+dkGet; ln -s $src.blob $src_$version-linux-x86_64.deb

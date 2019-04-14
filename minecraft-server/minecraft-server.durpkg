@@ -16,6 +16,7 @@ maintainer="Anonymous <foobar@example.org>"
 srcurl="https://launcher.mojang.com/v1/objects/3737db93722a9e39eeada7c27e7aca28b144ffa7/server.jar"
 md5sum="dc51d617728fdccac2082220aaaf7188"
 homepage="https://www.minecraft.net/en-us/download/server/"
+dk_skip="dh_strip dh_strip_nondeterminism"
 
 # Get and Pre-Process Source
 dkGet; mkdir $src; cp $src.blob $src/$src.jar

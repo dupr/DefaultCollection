@@ -1,0 +1,36 @@
+set -e
+. /usr/share/duprkit/duprkit || \
+	(echo "Error: the duprkit installation looks broken."; exit 1)
+export DK_VERBOSE=1
+
+src="${0%.durpkg.sh}"
+version="0.git"
+description="A lightning fast Finite State machine and REgular expression manipulation library."
+license="Expat/MIT"
+section="science"
+stdver="4.3.0"
+compat="11"
+maintainer="Anonymous <foobar@example.org>"
+srcurl="https://github.com/Microsoft/BlingFire/archive/master.tar.gz"
+homepage=""
+build_depends="cmake,dh-python,python3-all,"
+depends=""
+dh_buildsystem="cmake"
+dh_with=""
+dk_skip=""
+
+if ! test -r $src.tar.gz; then
+	wget -c $srcurl -O $src.blob
+	ln -s $src.blob $src.tar.gz
+fi
+mkdir $src; tar xf $src.tar.gz --strip-components=1 -C $src/
+
+dkGenerate $src
+hft -v -u ${0%.sh}.hft -d $src/ -F
+dkSubst $src/debian
+
+dkStartBuild $src
+
+^ debian/install
+obj-*/libblingfiretokdll.so  usr/lib/python3/dist-packages/
+scripts/blingfiretok.py      usr/lib/python3/dist-packages/

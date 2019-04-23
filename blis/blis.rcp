@@ -1,8 +1,3 @@
-#!/bin/bash
-set -e
-. /usr/share/duprkit/duprkit || (echo "Error: duprkit installation is incorrect."; exit 1)
-export DK_VERBOSE=1
-
 # Meta Information
 src="blis"
 srcurl="https://github.com/flame/blis/archive/0.5.2.tar.gz"
@@ -16,18 +11,6 @@ maintainer="Anonymous <foobar@example.org>"
 build_depends=""
 depends=""
 
-# get upstream source and prepare
-if ! test -r 0.5.2.tar.gz; then wget -c $srcurl; fi
-tar zxf 0.5.2.tar.gz -C .
-ln -s blis-0.5.2 $src
-
-# Unfold the HFT part (if any) into the dir. Then Generate missing files.
-hft -u ${0%.sh}.hft -d $src/
-dkGenerate $src
-
-# Trigger the build process
-dkStartBuild $src
-^############################################################## SPLIT LINE ####
 ^ debian/rules
 #!/usr/bin/make -f
 %:

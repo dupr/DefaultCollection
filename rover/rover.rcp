@@ -1,0 +1,18 @@
+# Meta Information
+src="rover"
+version="0.72"
+description="text-based light-weight frontend for update-alternatives"
+srcurl="https://salsa.debian.org/debian/rover/-/archive/master/rover-master.tar.gz"
+license="GPL-3.0+"
+section="utils"
+maintainer="DUPR Default Collection <foobar@example.org>"
+depends="python3-termbox,"
+
+dk_prep_source () {
+	mkdir $src
+	tar xf ${src}_${version}.tar.gz --strip-components=1 -C $src
+	rm -rf $src/debian
+}
+
+^ debian/install
+rover usr/bin/

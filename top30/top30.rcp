@@ -1,0 +1,39 @@
+src="top30"
+upstream_version="2.0.0"
+revision="1"
+version="$upstream_version-$revision"
+description="creates rundowns from top 30 charts"
+license="GPL-3"
+section="sound"
+stdver="4.3.0"
+compat="11"
+maintainer="Kyle Robbertze <krobbertze@gmail.com>"
+srcurl="https://gitlab.com/paddatrapper/top30/-/archive/2.0.0/top30-2.0.0.tar.gz"
+md5sum="b3e5c27f3bdc137fc4f13f8192314f60"
+homepage="https://gitlab.com/paddatrapper/top30"
+build_depends="python3-setuptools, python3-mutagen, python3-pydub, youtube-dl, python3-pyqt5"
+depends=""
+dh_buildsystem="pybuild"
+dh_with="python3"
+source_format="3.0 (quilt)"
+
+dk_prep_source () {
+	ln -s ${src}_${version}.tar.gz ${src}_${upstream_version}.orig.tar.gz
+	mkdir $src
+   	tar xf ${src}_${upstream_version}.orig.tar.gz --strip-components=1 -C $src/
+}
+
+^ debian/patches/Remove_pyqt5_install_dependency_check
+--- a/setup.py
++++ b/setup.py
+@@ -41,7 +41,7 @@
+     ],
+     keywords='radio audio rundown',
+     packages=find_packages(),
+-    install_requires=['mutagen', 'pydub', 'youtube_dl', 'PyQt5'],
++    install_requires=['mutagen', 'pydub', 'youtube_dl'],
+     package_data={
+         '': ['LICENCE.md'],
+         'top30': [
+^ debian/patches/series
+Remove_pyqt5_install_dependency_check

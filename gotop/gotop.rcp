@@ -1,0 +1,17 @@
+# Meta Information
+src="gotop"
+version="3.0.0"
+description="A terminal based graphical activity monitor inspired by gtop and vtop"
+srcurl="https://github.com/cjbassi/gotop/releases/download/3.0.0/gotop_3.0.0_linux_amd64.tgz"
+license="AGPL-3.0"
+section="utils"
+maintainer="Mo Zhou <lumin@debian.org>"
+builddepends=""
+
+dk_prep_source () {
+	mkdir $src
+	tar xf ${src}_${version}.tar.gz -C $src
+}
+
+^ debian/gotop.install
+gotop  usr/bin/

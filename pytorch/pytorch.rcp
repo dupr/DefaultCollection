@@ -1,0 +1,35 @@
+src="${0%.sh}"
+version="1.0.1"
+description="Tensors and Dynamic neural networks in Python with strong GPU acceleration"
+license="BSD-3-Clause"
+section="science"
+maintainer="Anonymous <foobar@example.org>"
+srcurl="https://github.com/pytorch/pytorch.git"
+homepage="https://pytorch.org/"
+build_depends="cmake,python3-all,python3-all-dev,python3-numpy,python3-cffi,python3-setuptools,libopenblas-dev,"
+depends="python3,python3-numpy,python3-cffi"
+dh_buildsystem=""
+dh_with=""
+source_format=""
+dk_skip=""
+
+dk_get_source () {
+  if test -d pytorch; then return ; fi
+  git clone --recursive $srcurl -b v1.0.1
+}
+
+dk_prep_source () {
+  true
+}
+
+^ debian/rules 0o755
+#!/usr/bin/make -f
+export NO_CUDA=1
+%:
+	dh $@  # -S@DH_BUILDSYSTEM@ --with @DH_WITH@
+
+override_dh_auto_build:
+	python3 setup.py build
+
+override_dh_auto_install:
+	python3 setup.py install --install-layout=deb --root=$(shell pwd)/debian/pytorch/

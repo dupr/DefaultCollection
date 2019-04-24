@@ -1,4 +1,4 @@
-src="${0%.sh}"
+src="$(basename ${0%.sh})"
 version="1.0.1"
 description="Tensors and Dynamic neural networks in Python with strong GPU acceleration"
 license="BSD-3-Clause"

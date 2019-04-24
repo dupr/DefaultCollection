@@ -1,4 +1,4 @@
-src="${0%.sh}"
+src="$(basename ${0%.sh})"
 version="0.git"
 description="A lightning fast Finite State machine and REgular expression manipulation library."
 license="Expat/MIT"

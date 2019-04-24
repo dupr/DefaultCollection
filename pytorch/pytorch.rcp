@@ -29,6 +29,9 @@ export NO_CUDA=1
 %:
 	dh $@  # -S@DH_BUILDSYSTEM@ --with @DH_WITH@
 
+override_dh_auto_clean:
+	-$(RM) -r build*
+
 override_dh_auto_build:
 	python3 setup.py build
 

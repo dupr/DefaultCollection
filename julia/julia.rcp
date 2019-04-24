@@ -1,0 +1,15 @@
+src="julia"
+version="1.1.0"
+description="The Julia Programming Language"
+section="math"
+srcurl="https://julialang-s3.julialang.org/bin/linux/x64/1.1/julia-1.1.0-linux-x86_64.tar.gz"
+license="Expat/MIT"
+maintainer="DUPR Default Collection"
+dk_skip="dh_strip dh_shlibdeps"
+
+^ debian/julia.install
+include usr/
+share   usr/
+lib     usr/
+lib     usr/
+etc

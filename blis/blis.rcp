@@ -6,11 +6,12 @@ description="BLAS-like Library Instantiation Software Framework"
 license="BSD-3-Clause"
 section="math"
 maintainer="Anonymous <foobar@example.org>"
-build_depends=""
+build_depends="python3,"
 depends=""
 
 ^ debian/rules
 #!/usr/bin/make -f
+export PYTHON=/usr/bin/python3
 %:
 	dh $@
 

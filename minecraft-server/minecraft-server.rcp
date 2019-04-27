@@ -1,12 +1,11 @@
 # Meta Information.
 src="minecraft-server"
-version="1.13.2"
+version="1.14"
 description="Minecraft Server: Java Edition"
 license="Minecraft EULA: https://jfmsu.minecraft.net/terms"
 section="game"
 maintainer="Anonymous <foobar@example.org>"
-srcurl="https://launcher.mojang.com/v1/objects/3737db93722a9e39eeada7c27e7aca28b144ffa7/server.jar"
-md5sum="dc51d617728fdccac2082220aaaf7188"
+srcurl="https://launcher.mojang.com/v1/objects/f1a0073671057f01aa843443fef34330281333ce/server.jar"
 homepage="https://www.minecraft.net/en-us/download/server/"
 dk_skip="dh_strip dh_strip_nondeterminism"
 

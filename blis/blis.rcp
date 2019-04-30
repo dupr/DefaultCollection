@@ -9,7 +9,7 @@ maintainer="Anonymous <foobar@example.org>"
 build_depends="python3,"
 depends=""
 
-^ debian/rules
+^ debian/rules 0o755
 #!/usr/bin/make -f
 export PYTHON=/usr/bin/python3
 %:

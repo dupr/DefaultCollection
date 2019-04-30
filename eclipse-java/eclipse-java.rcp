@@ -1,0 +1,35 @@
+# Meta Information.
+src="eclipse-java"
+version="19.03"
+description="Eclipse IDE for Java Developers"
+license="Eclipse Public License https://www.eclipse.org/legal/epl-2.0/"
+section="devel"
+maintainer="Shanker Wang <shankerwangmiao@gmail.com>"
+srcurl="https://mirrors.tuna.tsinghua.edu.cn/eclipse/technology/epp/downloads/release/2019-03/R/eclipse-java-2019-03-R-linux-gtk-x86_64.tar.gz"
+homepage="https://www.eclipse.org/downloads/packages/"
+dk_skip="dh_strip dh_strip_nondeterminism"
+depends="libsecret-1-0"
+
+dk_get_source () {
+ if ! test -r "${src}.tar.gz"; then
+  wget -c "$srcurl" -O "${src}.tar.gz"
+ fi
+}
+
+dk_prep_source () {
+ mkdir -p "$src"
+ tar -C "$src/" -xvzf "${src}.tar.gz"
+}
+
+^ debian/install
+eclipse opt/
+eclipse.desktop usr/share/applications/
+^ eclipse.desktop 0o644
+[Desktop Entry]
+Type=Application
+Name=Eclipse
+Comment=Eclipse Integrated Development Environment
+Icon=/opt/eclipse/icon.xpm
+Exec=/opt/eclipse/eclipse
+Terminal=false
+Categories=Development;IDE;Java;

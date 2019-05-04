@@ -9,12 +9,8 @@ maintainer="Anonymous <foobar@example.org>"
 build_depends="python3,"
 depends=""
 
-^ debian/rules 0o755
-#!/usr/bin/make -f
+^^ debian/rules
 export PYTHON=/usr/bin/python3
-%:
-	dh $@
-
 CONFIG_ppc64el = power9
 CONFIG_armhf   = auto
 CONFIG_amd64   = auto

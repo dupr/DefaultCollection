@@ -1,3 +1,4 @@
+Note: This recipe doesn't build with sbuild due to long-standing upstream build system defect.
 Source: pytorch
 Version: 1.0.1
 Description: Tensors and Dynamic neural networks in Python with strong GPU acceleration
@@ -6,11 +7,11 @@ Section: science
 Maintainer: M. Zhou <lumin@debian.org>
 Source-URL: "https://github.com/pytorch/pytorch.git"
 Homepage: "https://pytorch.org/"
-Build-Depends: cmake,python3-all,python3-all-dev,python3-numpy,python3-cffi,python3-setuptools,libopenblas-dev
+Build-Depends: cmake,python3-all,python3-all-dev,python3-numpy,python3-cffi,python3-setuptools,libopenblas-dev,python3-yaml
 Depends: python3,python3-numpy,python3-cffi
 
 Recipe-Prep-Source: |
-  if ! test -d pytorch; then git clone --recursive @Source-URL@ -b v@Version@; fi
+  if ! test -d pytorch; then git clone --depth=1 --recursive @Source-URL@ -b v@Version@; fi
 
 ^ debian/rules 0o755
 #!/usr/bin/make -f
